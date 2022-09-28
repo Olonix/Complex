@@ -1,131 +1,122 @@
 #include "Complex.h"
 
-int main(){
+void err() {
+    std::cout << "Test failed" << std::endl;
+    exit(1);
+}
+
+void TestPlusCom(){
     Complex a(5 , 6);
     Complex b(-3, 8);
-    double prim = 9;
-    
-    cout << "Testing constructor with parameters: " ;
-    if (b.real == -3 && b.im == 8) cout << "passed" << endl;
-    else cout << "failed" << endl;
-    
+    a += b;
+    if (a.real != 2 || a.im != 14) err();
+}
 
-    Complex c(a);
-    cout << "Testing copy constructor: " ;
-    if (c.real == 5 && c.im == 6) cout << "passed" << endl;
-    else cout << "failed" << endl;
+void TestPlusPrim(){
+    Complex a(5 , 6);
+    a += 9;
+    if (a.real != 14 || a.im != 6) err();
+}
 
+void TestMinusCom(){
+    Complex a(5 , 6);
+    Complex b(-3, 8);
+    a -= b;
+    if (a.real != 8 || a.im != -2) err();
+}
 
-    Complex d;
-    cout << "Testing common constructor: " ;
-    if (d.real == 0 && d.im == 0) cout << "passed" << endl;
-    else cout << "failed" << endl;
-    cout << endl;
+void TestMinusPrim(){
+    Complex a(5 , 6);
+    a -= 9;
+    if (a.real != -4 || a.im != 6) err();
+}
 
+void TestMultCom(){
+    Complex a(5 , 6);
+    Complex b(-3, 8);
+    a *= b;
+    if (a.real != -63 || a.im != 22) err();
+}
 
-    cout << "Testing complex summation: " ;
-    c += b;
-    if (c.real == 2 && c.im == 14) cout << "passed" << endl;
-    else cout << "failed" << endl;
+void TestMiltPrim(){
+    Complex a(5 , 6);
+    a *= 9;
+    if (a.real != 45 || a.im != 54) err();
+}
 
+void TestDivCom(){
+    Complex a(5 , 6);
+    Complex b(-3, 8);
+    a /= b;
+    if (a.real != double(33)/double(73) || a.im != double(-58)/double(73)) err();
+}
 
+void TestDivPrim(){
+    Complex a(5 , 6);
+    a /= 9;
+    if (a.real != double(5)/double(9) || a.im != double(6)/double(9)) err();
+}
+
+void TestAssign(){
+    Complex a(5 , 6);
+    Complex c;
     c = a;
-    cout << "Testing primitive summation: " ;
-    c += prim;
-    if (c.real == 14 && c.im == 6) cout << "passed" << endl;
-    else cout << "failed" << endl;
-    cout << endl;
+    if (c.real != 5 || c.im != 6) err();
+}
 
+void TestRavno1(){
+    Complex a(5 , 6);
+    Complex b(a);
+    bool res = (a == b);
+    if (res != 1) err();
+}
 
-    c = a;
-    cout << "Testing complex subtraction: " ;
-    c -= b;
-    if (c.real == 8 && c.im == -2) cout << "passed" << endl;
-    else cout << "failed" << endl;
+void TestRavno2(){
+    Complex a(5 , 6);
+    Complex b(-3, 8);
+    bool res = (a == b);
+    if (res != 0) err();
+}
 
+void TestUnoPlus(){
+    Complex a(5 , 6);
+    if ((a == +a) == 0) err();
+}
 
-    c = a;
-    cout << "Testing primitive summation: " ;
-    c -= prim;
-    if (c.real == -4 && c.im == 6) cout << "passed" << endl;
-    else cout << "failed" << endl;
-    cout << endl;
+void TestUnoMinus(){
+    Complex a(5 , 6);
+    if (((a *= -1)  == -a) == 0) err();
+}
 
+void TestMore(){
+    Complex a(5 , 6);
+    Complex b(-3, 8);
+    bool res = (a < b);
+    if (res != 1) err();
+}
 
-    c = a;
-    cout << "Testing complex multiplication: " ;
-    c *= b;
-    if (c.real == -63 && c.im == 22) cout << "passed" << endl;
-    else cout << "failed" << endl;
-    
-    
-    c = a;
-    cout << "Testing primitive multiplication: " ;
-    c *= prim;
-    if (c.real == 45 && c.im == 54) cout << "passed" << endl;
-    else cout << "failed" << endl;
-    cout << endl;
+void TestLess(){
+    Complex a(5 , 6);
+    Complex b(-3, 8);
+    bool res = (a > b);
+    if (res != 0) err();
+}
 
-
-    c = a;
-    cout << "Testing complex division: " ;
-    c /= b;
-    if (c.real == double(33)/double(73) && c.im == double(-58)/double(73)) cout << "passed" << endl;
-    else cout << "failed" << endl;
-    
-    
-    c = a;
-    cout << "Testing primitive division: " ;
-    c /= prim;
-    if (c.real == double(5)/double(9) && c.im == double(6)/double(9)) cout << "passed" << endl;
-    else cout << "failed" << endl;
-    cout << endl;
-
-
-    c = b; 
-    cout << "Testing assignment: " ;
-    if (c.real == -3 && c.im == 8) cout << "passed" << endl;
-    else cout << "failed" << endl;
-    cout << endl;
-
-
-    c = a;
-    -c;
-    cout << "Testing unary -: " ;
-    if (c.real == -5 && c.im == -6) cout << "passed" << endl;
-    else cout << "failed" << endl;
-
-
-    c = a;
-    +c;
-    cout << "Testing unary +: " ;
-    if (c.real == 5 && c.im == 6) cout << "passed" << endl;
-    else cout << "failed" << endl;
-    cout << endl;
-
-
-    bool res = (c == b);
-    cout << "Testing == operation #1: " ;
-    if (res == 0) cout << "passed" << endl;
-    else cout << "failed" << endl;
-
-
-    res = (c==a);
-    cout << "Testing == operation #2: " ;
-    if (res == 1) cout << "passed" << endl;
-    else cout << "failed" << endl;
-
-
-    res = (c < b);
-    cout << "Testing < operation: " ;
-    if (res == 1) cout << "passed" << endl;
-    else cout << "failed" << endl;
-
-
-    res = (c > b);
-    cout << "Testing > operation: " ;
-    if (res == 0) cout << "passed" << endl;
-    else cout << "failed" << endl;
-
-    return 0;
+int main(){
+    TestPlusCom();
+    TestPlusPrim();
+    TestMinusCom();
+    TestMinusPrim();
+    TestMultCom();
+    TestMiltPrim();
+    TestDivCom();
+    TestDivPrim();
+    TestAssign();
+    TestRavno1();
+    TestRavno2();
+    TestUnoPlus();
+    TestUnoMinus();
+    TestMore();
+    TestLess();
+    std::cout << "Test passed" << std::endl;
 }
