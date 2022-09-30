@@ -41,3 +41,8 @@ struct Complex {
     bool operator < (const Complex& another) const;
     bool operator > (const Complex& another) const;
 };
+
+Complex operator + (double z, const Complex& another);
+Complex operator - (double z, const Complex& another);
+Complex operator * (double z, const Complex& another);
+Complex operator / (double z, const Complex& another);
