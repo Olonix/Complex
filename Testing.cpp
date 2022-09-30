@@ -1,122 +1,294 @@
 #include "Complex.h"
+#include <iostream>
 
-void err() {
-    std::cout << "Test failed" << std::endl;
-    exit(1);
+void Test_Bin_Plus_Com(int *f){
+    Complex a(5, 6);
+    Complex b(-3, 8);
+    if ((a + b).real != 2 || (a + b).im != 14) {
+        std::cout << "'+ complex' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestPlusCom(){
-    Complex a(5 , 6);
+void Test_Bin_Plus_Prim(int *f){
+    Complex a(5, 6);
+    if ((a + 9).real != 14 || a.im != 6) {
+        std::cout << "'+ primitive' test failed" << std::endl;
+        *f = 1;
+    }
+}
+
+void Test_Bin_Minus_Com(int *f){
+    Complex a(5, 6);
+    Complex b(-3, 8);
+    if ((a - b).real != 8 || (a - b).im != -2) {
+        std::cout << "'- complex' test failed" << std::endl;
+        *f = 1;
+    }
+}
+
+void Test_Bin_Minus_Prim(int *f){
+    Complex a(5, 6);
+    if ((a - 9).real != -4 || a.im != 6) {
+        std::cout << "'- primitive' test failed" << std::endl;
+        *f = 1;
+    }
+}
+
+void Test_Bin_Mult_Com(int *f){
+    Complex a(5, 6);
+    Complex b(-3, 8);
+    if ((a * b).real != -63 || (a * b).im != 22) {
+        std::cout << "'* complex' test failed" << std::endl;
+        *f = 1;
+    }
+}
+
+void Test_Bin_Milt_Prim(int *f){
+    Complex a(5, 6);
+    if ((a * 9).real != 45 || (a * 9).im != 54) {
+        std::cout << "'* primitive' test failed" << std::endl;
+        *f = 1;
+    }
+}
+
+void Test_Bin_Div_Com_1(int *f){
+    Complex a(5, 6);
+    Complex b(-3, 8);
+    if ((a / b).real != double(33)/double(73) || (a / b).im != double(-58)/double(73)) {
+        std::cout << "'/= complex' test failed" << std::endl;
+        *f = 1;
+    }
+}
+
+void Test_Bin_Div_Prim_1(int *f){
+    Complex a(5, 6);
+    if ((a / 9).real != double(5)/double(9) || (a / 9).im != double(6)/double(9)) {
+        std::cout << "'/= primitive' test failed" << std::endl;
+        *f = 1;
+    }
+}
+
+void Test_Bin_Div_Com_2(int *f){
+    Complex a(5, 6);
+    Complex b;
+    if ((a / b).real != 5 || (a / b).im != 6) {
+        std::cout << "'/= complex' test failed" << std::endl;
+        *f = 1;
+    }
+}
+
+void Test_Bin_Div_Prim_2(int *f){
+    Complex a(5, 6);
+    if ((a / 0).real != 5 || (a / 0).im != 6) {
+        std::cout << "'/= primitive' test failed" << std::endl;
+        *f = 1;
+    }
+}
+
+void Test_Plus_Com(int *f){
+    Complex a(5, 6);
     Complex b(-3, 8);
     a += b;
-    if (a.real != 2 || a.im != 14) err();
+    if (a.real != 2 || a.im != 14) {
+        std::cout << "'+= complex' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestPlusPrim(){
-    Complex a(5 , 6);
+void Test_Plus_Prim(int *f){
+    Complex a(5, 6);
     a += 9;
-    if (a.real != 14 || a.im != 6) err();
+    if (a.real != 14 || a.im != 6) {
+        std::cout << "'+= primitive' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestMinusCom(){
-    Complex a(5 , 6);
+void Test_Minus_Com(int *f){
+    Complex a(5, 6);
     Complex b(-3, 8);
     a -= b;
-    if (a.real != 8 || a.im != -2) err();
+    if (a.real != 8 || a.im != -2) {
+        std::cout << "'-= complex' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestMinusPrim(){
-    Complex a(5 , 6);
+void Test_Minus_Prim(int *f){
+    Complex a(5, 6);
     a -= 9;
-    if (a.real != -4 || a.im != 6) err();
+    if (a.real != -4 || a.im != 6) {
+        std::cout << "'-= primitive' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestMultCom(){
-    Complex a(5 , 6);
+void Test_Mult_Com(int *f){
+    Complex a(5, 6);
     Complex b(-3, 8);
     a *= b;
-    if (a.real != -63 || a.im != 22) err();
+    if (a.real != -63 || a.im != 22) {
+        std::cout << "'*= complex' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestMiltPrim(){
-    Complex a(5 , 6);
+void Test_Milt_Prim(int *f){
+    Complex a(5, 6);
     a *= 9;
-    if (a.real != 45 || a.im != 54) err();
+    if (a.real != 45 || a.im != 54) {
+        std::cout << "'*= primitive' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestDivCom(){
-    Complex a(5 , 6);
+void Test_Div_Com_1(int *f){
+    Complex a(5, 6);
     Complex b(-3, 8);
     a /= b;
-    if (a.real != double(33)/double(73) || a.im != double(-58)/double(73)) err();
+    if (a.real != double(33)/double(73) || a.im != double(-58)/double(73)) {
+        std::cout << "'/= complex' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestDivPrim(){
-    Complex a(5 , 6);
+void Test_Div_Prim_1(int *f){
+    Complex a(5, 6);
     a /= 9;
-    if (a.real != double(5)/double(9) || a.im != double(6)/double(9)) err();
+    if (a.real != double(5)/double(9) || a.im != double(6)/double(9)) {
+        std::cout << "'/= primitive' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestAssign(){
-    Complex a(5 , 6);
+void Test_Div_Com_2(int *f){
+    Complex a(5, 6);
+    Complex b;
+    a /= b;
+    if (a.real != 5 || a.im != 6) {
+        std::cout << "'/= complex(0, 0)' test failed" << std::endl;
+        *f = 1;
+    }
+}
+
+void Test_Div_Prim_2(int *f){
+    Complex a(5, 6);
+    a /= 0;
+    if (a.real != 5 || a.im != 6) {
+        std::cout << "'/= 0' test failed" << std::endl;
+        *f = 1;
+    }
+}
+
+void Test_Assign(int *f){
+    Complex a(5, 6);
     Complex c;
     c = a;
-    if (c.real != 5 || c.im != 6) err();
+    if (c.real != 5 || c.im != 6) {
+        std::cout << "'=' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestRavno1(){
-    Complex a(5 , 6);
+void Test_Ravno_1(int *f){
+    Complex a(5, 6);
     Complex b(a);
     bool res = (a == b);
-    if (res != 1) err();
+    if (res != 1) { 
+        std::cout << "'==' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestRavno2(){
-    Complex a(5 , 6);
+void Test_Ravno_2(int *f){
+    Complex a(5, 6);
     Complex b(-3, 8);
     bool res = (a == b);
-    if (res != 0) err();
+    if (res != 0) {
+        std::cout << "'==' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestUnoPlus(){
-    Complex a(5 , 6);
-    if ((a == +a) == 0) err();
+void Test_Uno_Plus(int *f){
+    Complex a(5, 6);
+    if ((+a).real != 5 || (+a).im != 6) {
+        std::cout << "'unary +' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestUnoMinus(){
-    Complex a(5 , 6);
-    if (((a *= -1)  == -a) == 0) err();
+void Test_Uno_Minus(int *f){
+    Complex a(5, 6);
+    if ((-a).real != -5 || (-a).im != -6) {
+        std::cout << "'unary -' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestMore(){
-    Complex a(5 , 6);
+void Test_More(int  *f){
+    Complex a(5, 6);
     Complex b(-3, 8);
     bool res = (a < b);
-    if (res != 1) err();
+    if (res != 1) {
+        std::cout << "'<' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
-void TestLess(){
-    Complex a(5 , 6);
+void Test_Less(int *f){
+    Complex a(5, 6);
     Complex b(-3, 8);
     bool res = (a > b);
-    if (res != 0) err();
+    if (res != 0) {
+        std::cout << "'>' test failed" << std::endl;
+        *f = 1;
+    }
 }
 
 int main(){
-    TestPlusCom();
-    TestPlusPrim();
-    TestMinusCom();
-    TestMinusPrim();
-    TestMultCom();
-    TestMiltPrim();
-    TestDivCom();
-    TestDivPrim();
-    TestAssign();
-    TestRavno1();
-    TestRavno2();
-    TestUnoPlus();
-    TestUnoMinus();
-    TestMore();
-    TestLess();
-    std::cout << "Test passed" << std::endl;
+    int flag = 0;
+    Test_Bin_Plus_Com(&flag);
+    Test_Bin_Plus_Prim(&flag);
+
+    Test_Bin_Minus_Com(&flag);
+    Test_Bin_Minus_Prim(&flag);
+
+    Test_Bin_Mult_Com(&flag);
+    Test_Bin_Milt_Prim(&flag);
+
+    Test_Bin_Div_Com_1(&flag);
+    Test_Bin_Div_Prim_1(&flag);
+    Test_Bin_Div_Com_2(&flag);
+    Test_Bin_Div_Prim_2(&flag);
+
+    Test_Plus_Com(&flag);
+    Test_Plus_Prim(&flag);
+
+    Test_Minus_Com(&flag);
+    Test_Minus_Prim(&flag);
+
+    Test_Mult_Com(&flag);
+    Test_Milt_Prim(&flag);
+
+    Test_Div_Com_1(&flag);
+    Test_Div_Prim_1(&flag);
+    Test_Div_Com_2(&flag);
+    Test_Div_Prim_2(&flag);
+
+    Test_Assign(&flag);
+
+    Test_Uno_Plus(&flag);
+    Test_Uno_Minus(&flag);
+
+    Test_Ravno_1(&flag);
+    Test_Ravno_2(&flag);
+    Test_More(&flag);
+    Test_Less(&flag);
+    if (flag == 0) {
+        std::cout << "Test passed" << std::endl;
+        return 0;
+    }
+    return -1;
 }
