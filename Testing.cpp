@@ -231,6 +231,14 @@ void Test_Assign(int *f){
     }
 }
 
+void Test_Abs(int *f){
+    Complex a(5, 6);
+    if (std::abs(a.absolute() - double(61)) >= 1e-9) {
+        std::cout << "'absolute' test failed" << std::endl;
+        *f = 1;
+    }
+}
+
 void Test_Ravno_1(int *f){
     Complex a(5, 6);
     Complex b(a);
@@ -283,14 +291,6 @@ void Test_Less(int *f){
     bool res = (a > b);
     if (res != 0) {
         std::cout << "'>' test failed" << std::endl;
-        *f = 1;
-    }
-}
-
-void Test_Abs(int *f){
-    Complex a(5, 6);
-    if (std::abs(a.absolute() - double(61)) >= 1e-9) {
-        std::cout << "'absolute' test failed" << std::endl;
         *f = 1;
     }
 }
