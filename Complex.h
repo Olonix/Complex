@@ -37,6 +37,8 @@ struct Complex {
     Complex operator + () const; 
     Complex operator - () const;
 
+    double absolute () const;
+
     bool operator == (const Complex& another) const; 
     bool operator < (const Complex& another) const;
     bool operator > (const Complex& another) const;
