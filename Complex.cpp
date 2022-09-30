@@ -20,6 +20,14 @@ Complex Complex::operator + (const Complex& another) const{
 Complex Complex::operator + (double z) const{
     Complex c;
     c.real = real + z;
+    c.im = im;
+    return c;
+}
+
+Complex operator + (double z, const Complex& another) {
+    Complex c;
+    c.real = z + another.real;
+    c.im = another.im;
     return c;
 }
 
@@ -33,6 +41,14 @@ Complex Complex::operator - (const Complex& another) const{
 Complex Complex::operator - (double z) const{
     Complex c;
     c.real = real - z;
+    c.im = im;
+    return c;
+}
+
+Complex operator - (double z, const Complex& another) {
+    Complex c;
+    c.real = z - another.real;
+    c.im = another.im;
     return c;
 }
 
@@ -47,6 +63,13 @@ Complex Complex::operator * (double z) const{
     Complex c;
     c.real = real * z;
     c.im = im * z;
+    return c;
+}
+
+Complex operator * (double z, const Complex& another) {
+    Complex c;
+    c.real = z * another.real;
+    c.im = z * another.im;
     return c;
 }
 
@@ -68,6 +91,17 @@ Complex Complex::operator / (double z) const{
     c.real = real / z;
     c.im = im / z;
     return c;     
+}
+
+Complex operator / (double z, const Complex& another) {
+    Complex c;
+    if (std::abs(another.real*another.real + another.im*another.im) < 1e-9) {
+        c.real = z;
+        return c;
+    }
+    c.real = z*another.real/(another.real*another.real + another.im*another.im);
+    c.im = -z*another.im/(another.real*another.real + another.im*another.im);
+    return c;    
 }
 
 Complex& Complex::operator += (const Complex& another) {
