@@ -86,7 +86,7 @@ Complex Complex::operator / (const Complex& another) const{
 }
 
 Complex Complex::operator / (double z) const{
-    if (std::abs(z) < 1e-9) {
+    if (std::abs(z) < DOUBLE_CMP_EPS) {
         return *this;   
         }
     Complex c;
