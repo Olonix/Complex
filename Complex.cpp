@@ -1,6 +1,8 @@
 #include "Complex.h"
 #include <cmath>
 
+double DOUBLE_CMP_EPS = 1e-9;
+
 Complex::Complex(): real(0), im(0) {}
 
 Complex::Complex(double x, double y) {
@@ -74,7 +76,7 @@ Complex operator * (double z, const Complex& another) {
 }
 
 Complex Complex::operator / (const Complex& another) const{
-    if (std::abs(another.real*another.real + another.im*another.im) < 1e-9) {
+    if (std::abs(another.real*another.real + another.im*another.im) < DOUBLE_CMP_EPS) {
         return *this;
     } 
     Complex c;
@@ -95,7 +97,7 @@ Complex Complex::operator / (double z) const{
 
 Complex operator / (double z, const Complex& another) {
     Complex c;
-    if (std::abs(another.real*another.real + another.im*another.im) < 1e-9) {
+    if (std::abs(another.real*another.real + another.im*another.im) < DOUBLE_CMP_EPS) {
         c.real = z;
         return c;
     }
@@ -140,7 +142,7 @@ Complex& Complex::operator *= (double z) {
 }
 
 Complex& Complex::operator /= (const Complex& another) {
-    if (std::abs(another.real*another.real + another.im*another.im) < 1e-9) {
+    if (std::abs(another.real*another.real + another.im*another.im) < DOUBLE_CMP_EPS) {
         return *this;
     } 
     double realol = real;
@@ -150,7 +152,7 @@ Complex& Complex::operator /= (const Complex& another) {
 }
 
 Complex& Complex::operator /= (double z) {
-    if (std::abs(z) < 1e-9) {
+    if (std::abs(z) < DOUBLE_CMP_EPS) {
         return *this;   
         }
     im /= z;
@@ -173,8 +175,8 @@ Complex Complex::operator - () const{
     return minus;
 }
 
-double absolute(const Complex& num){
-    return (num.real*num.real + num.im*num.im);
+double Complex::absolute() const{
+    return (real*real + im*im);
 }
 
 bool Complex::operator == (const Complex& another) const{
@@ -182,9 +184,9 @@ bool Complex::operator == (const Complex& another) const{
 }
 
 bool Complex::operator < (const Complex& another) const{
-    return (absolute(*this) < absolute(another));
+    return (absolute() < another.absolute());
 }
 
 bool Complex::operator > (const Complex& another) const{
-    return (absolute(*this) > absolute(another));
+    return (absolute() > another.absolute());
 }
